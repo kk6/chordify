@@ -3,6 +3,7 @@ name: Weekly Progress Report
 on:
   schedule:
     - cron: '0 9 * * 1'  # 毎週月曜 9:00 UTC（日本時間18:00）
+  workflow_dispatch:
 
 jobs:
   weekly-report:
