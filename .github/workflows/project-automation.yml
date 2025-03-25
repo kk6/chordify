@@ -124,27 +124,6 @@ jobs:
 
             const event = context.eventName;
 
-            if (event === "pull_request") {
-              const pr = context.payload.pull_request;
-              const timeline = await github.rest.issues.listEventsForTimeline({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: pr.number,
-                mediaType: { previews: ['mockingbird'] }
-              });
-
-              for (const event of timeline.data) {
-                const issue = event.source?.issue;
-                if (event.event === 'cross-referenced' && issue && !issue.pull_request) {
-                  if (context.payload.action === 'closed' && pr.merged) {
-                    await updateStatus(issue.number, STATUS.DONE);
-                  } else if (context.payload.action === 'opened') {
-                    await updateStatus(issue.number, STATUS.IN_REVIEW);
-                  }
-                }
-              }
-            }
-
             if (event === "issues") {
               const issue = context.payload.issue;
 
