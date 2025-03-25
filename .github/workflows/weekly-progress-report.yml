@@ -11,12 +11,12 @@ jobs:
       - name: Generate and Post Weekly Progress
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_PROJECT_AUTOMATION }}
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const projectId = "PVT_kwHOAAkYos4A1Ltq";
-            const reportIssueNumber = 1; // ← 進捗ログ用のIssue番号に変更可能
+            const reportIssueNumber = 11;
 
             const since = new Date();
             since.setDate(since.getDate() - 7);
