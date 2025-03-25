@@ -55,26 +55,30 @@ jobs:
                 return;
               }
 
-              await github.graphql(`
-                mutation($input: UpdateProjectV2ItemFieldValueInput!) {
-                  updateProjectV2ItemFieldValue(input: $input) {
-                    projectV2Item {
-                      id
+              try {
+                await github.graphql(`
+                  mutation($input: UpdateProjectV2ItemFieldValueInput!) {
+                    updateProjectV2ItemFieldValue(input: $input) {
+                      projectV2Item {
+                        id
+                      }
                     }
                   }
-                }
-              `, {
-                input: {
-                  projectId,
-                  itemId,
-                  fieldId: statusFieldId,
-                  value: {
-                    singleSelectOptionId: statusId
+                `, {
+                  input: {
+                    projectId,
+                    itemId,
+                    fieldId: statusFieldId,
+                    value: {
+                      singleSelectOptionId: statusId
+                    }
                   }
-                }
-              });
+                });
 
-              console.log(`✅ Updated issue #${issueNumber} status.`);
+                console.log(`✅ Updated issue #${issueNumber} status.`);
+              } catch (error) {
+                console.log(`❌ Failed to update status for issue #${issueNumber}: ${error.message}`);
+              }
             }
 
             async function addIssueToProject(issueNodeId) {
