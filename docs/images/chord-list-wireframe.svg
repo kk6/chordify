@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f5f5f5"/>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="800" height="60" fill="#4a69bd"/>
+  <text x="30" y="38" font-family="Arial" font-size="24" fill="white">🎸 Chordify</text>
+  
+  <!-- ナビゲーションメニュー -->
+  <rect x="0" y="60" width="800" height="40" fill="#e5e7eb"/>
+  <text x="30" y="85" font-family="Arial" font-size="16" fill="#333">コード一覧</text>
+  <text x="150" y="85" font-family="Arial" font-size="16" fill="#777">ランダム練習</text>
+  <text x="290" y="85" font-family="Arial" font-size="16" fill="#777">学習進捗</text>
+  <text x="400" y="85" font-family="Arial" font-size="16" fill="#777">タグ管理</text>
+  
+  <!-- 検索・フィルターエリア -->
+  <rect x="30" y="120" width="740" height="50" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="50" y="135" width="300" height="20" rx="3" fill="#e5e7eb"/>
+  <text x="60" y="150" font-family="Arial" font-size="14" fill="#777">コード検索...</text>
+  <rect x="370" y="135" width="180" height="20" rx="3" fill="#e5e7eb"/>
+  <text x="380" y="150" font-family="Arial" font-size="14" fill="#777">タグでフィルター</text>
+  <rect x="570" y="135" width="180" height="20" rx="3" fill="#e5e7eb"/>
+  <text x="580" y="150" font-family="Arial" font-size="14" fill="#777">状態: すべて ▼</text>
+  
+  <!-- コード一覧グリッド -->
+  <!-- 1行目 -->
+  <rect x="30" y="190" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="45" y="205" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="58" y="260" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="58">E|--0--|</tspan>
+    <tspan x="58" dy="15">B|--1--|</tspan>
+    <tspan x="58" dy="15">G|--0--|</tspan>
+    <tspan x="58" dy="15">D|--2--|</tspan>
+    <tspan x="58" dy="15">A|--3--|</tspan>
+    <tspan x="58" dy="15">E|--x--|</tspan>
+  </text>
+  <text x="130" y="230" font-family="Arial" font-size="18" font-weight="bold" fill="#333">C Major</text>
+  <rect x="130" y="250" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="140" y="266" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="200" y="250" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="210" y="266" font-family="Arial" font-size="12" fill="white">C</text>
+  <circle cx="235" cy="205" r="10" stroke="#22c55e" stroke-width="2" fill="white"/>
+  <text x="232" y="210" font-family="Arial" font-size="14" fill="#22c55e">✓</text>
+  
+  <rect x="285" y="190" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="300" y="205" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="313" y="260" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="313">E|--0--|</tspan>
+    <tspan x="313" dy="15">B|--0--|</tspan>
+    <tspan x="313" dy="15">G|--1--|</tspan>
+    <tspan x="313" dy="15">D|--2--|</tspan>
+    <tspan x="313" dy="15">A|--2--|</tspan>
+    <tspan x="313" dy="15">E|--0--|</tspan>
+  </text>
+  <text x="385" y="230" font-family="Arial" font-size="18" font-weight="bold" fill="#333">E Minor</text>
+  <rect x="385" y="250" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="395" y="266" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="455" y="250" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="465" y="266" font-family="Arial" font-size="12" fill="white">Em</text>
+  <circle cx="490" cy="205" r="10" stroke="#ccc" stroke-width="2" fill="white"/>
+  <text x="487" y="210" font-family="Arial" font-size="14" fill="#ccc">✓</text>
+  
+  <rect x="540" y="190" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="555" y="205" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="568" y="260" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="568">E|--3--|</tspan>
+    <tspan x="568" dy="15">B|--3--|</tspan>
+    <tspan x="568" dy="15">G|--0--|</tspan>
+    <tspan x="568" dy="15">D|--0--|</tspan>
+    <tspan x="568" dy="15">A|--2--|</tspan>
+    <tspan x="568" dy="15">E|--3--|</tspan>
+  </text>
+  <text x="640" y="230" font-family="Arial" font-size="18" font-weight="bold" fill="#333">G Major</text>
+  <rect x="640" y="250" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="650" y="266" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="710" y="250" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="720" y="266" font-family="Arial" font-size="12" fill="white">G</text>
+  <circle cx="745" cy="205" r="10" stroke="#22c55e" stroke-width="2" fill="white"/>
+  <text x="742" y="210" font-family="Arial" font-size="14" fill="#22c55e">✓</text>
+  
+  <!-- 2行目 -->
+  <rect x="30" y="410" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="45" y="425" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="58" y="480" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="58">E|--2--|</tspan>
+    <tspan x="58" dy="15">B|--3--|</tspan>
+    <tspan x="58" dy="15">G|--2--|</tspan>
+    <tspan x="58" dy="15">D|--0--|</tspan>
+    <tspan x="58" dy="15">A|--x--|</tspan>
+    <tspan x="58" dy="15">E|--x--|</tspan>
+  </text>
+  <text x="130" y="450" font-family="Arial" font-size="18" font-weight="bold" fill="#333">D Major</text>
+  <rect x="130" y="470" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="140" y="486" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="200" y="470" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="210" y="486" font-family="Arial" font-size="12" fill="white">D</text>
+  <circle cx="235" cy="425" r="10" stroke="#ccc" stroke-width="2" fill="white"/>
+  <text x="232" y="430" font-family="Arial" font-size="14" fill="#ccc">✓</text>
+  
+  <rect x="285" y="410" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="300" y="425" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="313" y="480" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="313">E|--0--|</tspan>
+    <tspan x="313" dy="15">B|--2--|</tspan>
+    <tspan x="313" dy="15">G|--2--|</tspan>
+    <tspan x="313" dy="15">D|--2--|</tspan>
+    <tspan x="313" dy="15">A|--0--|</tspan>
+    <tspan x="313" dy="15">E|--x--|</tspan>
+  </text>
+  <text x="385" y="450" font-family="Arial" font-size="18" font-weight="bold" fill="#333">A Minor</text>
+  <rect x="385" y="470" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="395" y="486" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="455" y="470" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="465" y="486" font-family="Arial" font-size="12" fill="white">Am</text>
+  <circle cx="490" cy="425" r="10" stroke="#22c55e" stroke-width="2" fill="white"/>
+  <text x="487" y="430" font-family="Arial" font-size="14" fill="#22c55e">✓</text>
+  
+  <rect x="540" y="410" width="230" height="200" rx="5" fill="white" stroke="#ccc"/>
+  <rect x="555" y="425" width="70" height="100" fill="#e5e7eb" rx="5"/>
+  <text x="568" y="480" font-family="Arial" font-size="12" fill="#333">
+    <tspan x="568">E|--0--|</tspan>
+    <tspan x="568" dy="15">B|--1--|</tspan>
+    <tspan x="568" dy="15">G|--2--|</tspan>
+    <tspan x="568" dy="15">D|--2--|</tspan>
+    <tspan x="568" dy="15">A|--0--|</tspan>
+    <tspan x="568" dy="15">E|--x--|</tspan>
+  </text>
+  <text x="640" y="450" font-family="Arial" font-size="18" font-weight="bold" fill="#333">F Major</text>
+  <rect x="640" y="470" width="60" height="22" rx="11" fill="#4a69bd"/>
+  <text x="650" y="486" font-family="Arial" font-size="12" fill="white">基本</text>
+  <rect x="710" y="470" width="40" height="22" rx="11" fill="#4a69bd"/>
+  <text x="720" y="486" font-family="Arial" font-size="12" fill="white">F</text>
+  <circle cx="745" cy="425" r="10" stroke="#ccc" stroke-width="2" fill="white"/>
+  <text x="742" y="430" font-family="Arial" font-size="14" fill="#ccc">✓</text>
+  
+  <!-- 新規追加ボタン -->
+  <circle cx="740" cy="530" r="30" fill="#4a69bd" stroke="#3a59ad" stroke-width="2"/>
+  <text x="733" y="538" font-family="Arial" font-size="30" fill="white">+</text>
+</svg>

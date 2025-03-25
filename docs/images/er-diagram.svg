@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- 背景 -->
+  <rect width="800" height="400" fill="#f8fafc"/>
+  
+  <!-- タイトル -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" fill="#334155" text-anchor="middle">Chordify データモデル ER図</text>
+  
+  <!-- Chordエンティティ -->
+  <rect x="100" y="100" width="250" height="200" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="100" y="100" width="250" height="40" rx="5" fill="#4a69bd" stroke="#4a69bd" stroke-width="2"/>
+  <text x="225" y="127" font-family="Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Chord</text>
+  
+  <!-- Chord属性 -->
+  <text x="120" y="160" font-family="Arial" font-size="14" fill="#334155">id (UUID, PK)</text>
+  <text x="120" y="185" font-family="Arial" font-size="14" fill="#334155">name (コード名)</text>
+  <text x="120" y="210" font-family="Arial" font-size="14" fill="#334155">fingering_data (JSON)</text>
+  <text x="120" y="235" font-family="Arial" font-size="14" fill="#334155">memo (TEXT)</text>
+  <text x="120" y="260" font-family="Arial" font-size="14" fill="#334155">is_mastered (BOOL)</text>
+  <text x="120" y="285" font-family="Arial" font-size="14" fill="#334155">created_at, updated_at (DATETIME)</text>
+  
+  <!-- Tagエンティティ -->
+  <rect x="450" y="150" width="250" height="120" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="450" y="150" width="250" height="40" rx="5" fill="#4a69bd" stroke="#4a69bd" stroke-width="2"/>
+  <text x="575" y="177" font-family="Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Tag</text>
+  
+  <!-- Tag属性 -->
+  <text x="470" y="210" font-family="Arial" font-size="14" fill="#334155">id (UUID, PK)</text>
+  <text x="470" y="235" font-family="Arial" font-size="14" fill="#334155">name (タグ名)</text>
+  <text x="470" y="260" font-family="Arial" font-size="14" fill="#334155">created_at (DATETIME)</text>
+  
+  <!-- 多対多の関連線 -->
+  <line x1="350" y1="200" x2="450" y2="200" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- 多対多のカラス足マーク（左） -->
+  <line x1="360" y1="190" x2="350" y2="200" stroke="#64748b" stroke-width="2"/>
+  <line x1="360" y1="210" x2="350" y2="200" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- 多対多のカラス足マーク（右） -->
+  <line x1="440" y1="190" x2="450" y2="200" stroke="#64748b" stroke-width="2"/>
+  <line x1="440" y1="210" x2="450" y2="200" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- 関連名 -->
+  <rect x="375" y="180" width="50" height="20" rx="5" fill="white" stroke="#94a3b8"/>
+  <text x="400" y="195" font-family="Arial" font-size="12" fill="#334155" text-anchor="middle">M:N</text>
+  
+  <!-- 補足説明 -->
+  <text x="400" y="330" font-family="Arial" font-size="14" fill="#64748b" text-anchor="middle">※ ChordとTagは多対多の関連を持ち、中間テーブルで関連付けられます。</text>
+  <text x="400" y="355" font-family="Arial" font-size="14" fill="#64748b" text-anchor="middle">※ fingering_dataはJSONで押弦位置情報を管理します。</text>
+</svg>

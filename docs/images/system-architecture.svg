@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- タイトル -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" fill="#334155" text-anchor="middle">Chordify システム構成図</text>
+  
+  <!-- Docker Compose環境 -->
+  <rect x="50" y="70" width="700" height="480" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="400" y="95" font-family="Arial" font-size="18" font-weight="bold" fill="#334155" text-anchor="middle">Docker Compose 環境</text>
+  
+  <!-- Nginx Container -->
+  <rect x="100" y="120" width="600" height="100" rx="5" fill="white" stroke="#64748b" stroke-width="2"/>
+  <rect x="100" y="120" width="600" height="30" rx="5" fill="#4a69bd" stroke="#4a69bd" stroke-width="2"/>
+  <text x="400" y="142" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Nginx Container (リバースプロキシ)</text>
+  <text x="180" y="170" font-family="Arial" font-size="14" fill="#334155">ポート: 80 (HTTP)</text>
+  <text x="180" y="195" font-family="Arial" font-size="14" fill="#334155">静的ファイル配信、API・フロントエンドへのルーティング</text>
+  
+  <!-- フロントエンド Container -->
+  <rect x="100" y="240" width="280" height="180" rx="5" fill="white" stroke="#64748b" stroke-width="2"/>
+  <rect x="100" y="240" width="280" height="30" rx="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+  <text x="240" y="262" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Frontend Container</text>
+  
+  <!-- フロントエンド技術スタック -->
+  <text x="120" y="290" font-family="Arial" font-size="14" font-weight="bold" fill="#334155">技術スタック:</text>
+  <text x="120" y="315" font-family="Arial" font-size="14" fill="#334155">• React (UI フレームワーク)</text>
+  <text x="120" y="340" font-family="Arial" font-size="14" fill="#334155">• TypeScript (静的型付け)</text>
+  <text x="120" y="365" font-family="Arial" font-size="14" fill="#334155">• Tailwind CSS (スタイリング)</text>
+  <text x="120" y="390" font-family="Arial" font-size="14" fill="#334155">• Zustand (状態管理)</text>
+  <text x="120" y="415" font-family="Arial" font-size="14" fill="#334155">• Tone.js (音声処理)</text>
+  
+  <!-- バックエンド Container -->
+  <rect x="420" y="240" width="280" height="180" rx="5" fill="white" stroke="#64748b" stroke-width="2"/>
+  <rect x="420" y="240" width="280" height="30" rx="5" fill="#22c55e" stroke="#22c55e" stroke-width="2"/>
+  <text x="560" y="262" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Backend Container</text>
+  
+  <!-- バックエンド技術スタック -->
+  <text x="440" y="290" font-family="Arial" font-size="14" font-weight="bold" fill="#334155">技術スタック:</text>
+  <text x="440" y="315" font-family="Arial" font-size="14" fill="#334155">• Django Ninja (APIフレームワーク)</text>
+  <text x="440" y="340" font-family="Arial" font-size="14" fill="#334155">• Gunicorn + Uvicorn (ASGIサーバー)</text>
+  <text x="440" y="365" font-family="Arial" font-size="14" fill="#334155">• REST API</text>
+  <text x="440" y="390" font-family="Arial" font-size="14" fill="#334155">• JSON</text>
+  <text x="440" y="415" font-family="Arial" font-size="14" fill="#334155">• JWT認証</text>
+  
+  <!-- データベース Container -->
+  <rect x="100" y="440" width="600" height="90" rx="5" fill="white" stroke="#64748b" stroke-width="2"/>
+  <rect x="100" y="440" width="600" height="30" rx="5" fill="#f59e0b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="400" y="462" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Database Container</text>
+  
+  <!-- データベース詳細 -->
+  <text x="120" y="490" font-family="Arial" font-size="14" font-weight="bold" fill="#334155">PostgreSQL:</text>
+  <text x="250" y="490" font-family="Arial" font-size="14" fill="#334155">• コードとタグの永続化</text>
+  <text x="450" y="490" font-family="Arial" font-size="14" fill="#334155">• 練習履歴と進捗データの保存</text>
+  <text x="120" y="515" font-family="Arial" font-size="14" fill="#334155">• JSONBデータ型でコード押弦データを格納</text>
+  
+  <!-- 接続線 - Nginx to Frontend -->
+  <line x1="240" y1="220" x2="240" y2="240" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 接続線 - Nginx to Backend -->
+  <line x1="560" y1="220" x2="560" y2="240" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 接続線 - Frontend to Backend -->
+  <line x1="380" y1="330" x2="420" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="400" y="320" font-family="Arial" font-size="12" fill="#64748b" text-anchor="middle">Axios</text>
+  
+  <!-- 接続線 - Backend to Database -->
+  <line x1="560" y1="420" x2="560" y2="440" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 矢印定義 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  
+  <!-- ユーザー -->
+  <circle cx="400" cy="40" r="0" fill="none"/> <!-- ダミー要素 -->
+  
+  <!-- 説明テキスト -->
+  <text x="400" y="570" font-family="Arial" font-size="14" fill="#64748b" text-anchor="middle">
+    Note: すべてのコンテナはDocker Compose環境内で管理され、ホストOSから独立して稼働します。
+  </text>
+</svg>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f5f5f5"/>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="800" height="60" fill="#4a69bd"/>
+  <text x="30" y="38" font-family="Arial" font-size="24" fill="white">🎸 Chordify</text>
+  
+  <!-- ナビゲーションメニュー -->
+  <rect x="0" y="60" width="800" height="40" fill="#e5e7eb"/>
+  <text x="30" y="85" font-family="Arial" font-size="16" fill="#777">コード一覧</text>
+  <text x="150" y="85" font-family="Arial" font-size="16" fill="#777">ランダム練習</text>
+  <text x="290" y="85" font-family="Arial" font-size="16" fill="#777">学習進捗</text>
+  <text x="400" y="85" font-family="Arial" font-size="16" fill="#777">タグ管理</text>
+  
+  <!-- 詳細コンテナ -->
+  <rect x="30" y="120" width="740" height="450" rx="5" fill="white" stroke="#ccc"/>
+  
+  <!-- ヘッダー部分 -->
+  <text x="50" y="160" font-family="Arial" font-size="28" font-weight="bold" fill="#333">C Major</text>
+  <circle cx="720" cy="150" r="20" stroke="#22c55e" stroke-width="3" fill="white"/>
+  <text x="715" y="155" font-family="Arial" font-size="18" font-weight="bold" fill="#22c55e">✓</text>
+  
+  <!-- タグ表示エリア -->
+  <rect x="50" y="175" width="70" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="65" y="192" font-family="Arial" font-size="14" fill="white">基本</text>
+  <rect x="130" y="175" width="50" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="145" y="192" font-family="Arial" font-size="14" fill="white">C</text>
+  <rect x="190" y="175" width="90" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="205" y="192" font-family="Arial" font-size="14" fill="white">メジャー</text>
+  
+  <!-- コード図 -->
+  <rect x="50" y="220" width="250" height="300" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  
+  <!-- フレット図 -->
+  <rect x="80" y="250" width="190" height="240" fill="#f0f0f0" stroke="#ccc"/>
+  
+  <!-- フレット横線 -->
+  <line x1="80" y1="270" x2="270" y2="270" stroke="#666" stroke-width="2"/>
+  <line x1="80" y1="310" x2="270" y2="310" stroke="#666" stroke-width="1"/>
+  <line x1="80" y1="350" x2="270" y2="350" stroke="#666" stroke-width="1"/>
+  <line x1="80" y1="390" x2="270" y2="390" stroke="#666" stroke-width="1"/>
+  <line x1="80" y1="430" x2="270" y2="430" stroke="#666" stroke-width="1"/>
+  
+  <!-- 弦縦線 -->
+  <line x1="100" y1="250" x2="100" y2="490" stroke="#333" stroke-width="1"/>
+  <line x1="130" y1="250" x2="130" y2="490" stroke="#333" stroke-width="1.2"/>
+  <line x1="160" y1="250" x2="160" y2="490" stroke="#333" stroke-width="1.4"/>
+  <line x1="190" y1="250" x2="190" y2="490" stroke="#333" stroke-width="1.6"/>
+  <line x1="220" y1="250" x2="220" y2="490" stroke="#333" stroke-width="1.8"/>
+  <line x1="250" y1="250" x2="250" y2="490" stroke="#333" stroke-width="2"/>
+
+  <!-- フレット番号 -->
+  <text x="65" y="290" font-family="Arial" font-size="12" fill="#666">1</text>
+  <text x="65" y="330" font-family="Arial" font-size="12" fill="#666">2</text>
+  <text x="65" y="370" font-family="Arial" font-size="12" fill="#666">3</text>
+  <text x="65" y="410" font-family="Arial" font-size="12" fill="#666">4</text>
+  <text x="65" y="450" font-family="Arial" font-size="12" fill="#666">5</text>
+  
+  <!-- 押弦位置 -->
+  <text x="250" y="240" font-family="Arial" font-size="14" fill="#333">X</text>
+  <circle cx="220" cy="290" r="15" fill="#4a69bd"/>
+  <circle cx="190" cy="330" r="15" fill="#4a69bd"/>
+  <text x="160" y="240" font-family="Arial" font-size="14" fill="#333">0</text>
+  <circle cx="130" cy="290" r="15" fill="#4a69bd"/>
+  <text x="100" y="240" font-family="Arial" font-size="14" fill="#333">0</text>
+  
+  <!-- コード情報エリア -->
+  <rect x="320" y="220" width="440" height="80" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  
+  <!-- 音名/度数表示切替タブ -->
+  <rect x="330" y="230" width="80" height="30" rx="5" fill="#4a69bd"/>
+  <text x="350" y="250" font-family="Arial" font-size="14" fill="white">音名</text>
+  <rect x="420" y="230" width="80" height="30" rx="5" fill="#e5e7eb"/>
+  <text x="440" y="250" font-family="Arial" font-size="14" fill="#666">度数</text>
+  
+  <!-- 音名表示 -->
+  <text x="330" y="280" font-family="Arial" font-size="14" fill="#333">構成音: C - E - G</text>
+  
+  <!-- 音声再生ボタン -->
+  <rect x="550" y="235" width="100" height="40" rx="20" fill="#22c55e"/>
+  <text x="570" y="260" font-family="Arial" font-size="14" fill="white">再生 ▶</text>
+  
+  <!-- メモエリア -->
+  <rect x="320" y="320" width="440" height="200" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="330" y="345" font-family="Arial" font-size="16" font-weight="bold" fill="#333">メモ</text>
+  <rect x="330" y="360" width="420" height="150" rx="5" fill="white" stroke="#ccc"/>
+  <text x="340" y="380" font-family="Arial" font-size="14" fill="#666">
+    <tspan x="340" dy="0">Cメジャーコードは最も基本的なコードの一つ。</tspan>
+    <tspan x="340" dy="20">初心者が最初に覚えるコードとして最適。</tspan>
+    <tspan x="340" dy="20">多くの曲で使われる明るい響きが特徴。</tspan>
+  </text>
+  
+  <!-- 操作ボタン -->
+  <rect x="320" y="540" width="100" height="40" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="350" y="565" font-family="Arial" font-size="14" fill="#333">戻る</text>
+  
+  <rect x="430" y="540" width="100" height="40" rx="5" fill="#3b82f6"/>
+  <text x="460" y="565" font-family="Arial" font-size="14" fill="white">編集</text>
+  
+  <rect x="540" y="540" width="100" height="40" rx="5" fill="#ef4444"/>
+  <text x="570" y="565" font-family="Arial" font-size="14" fill="white">削除</text>
+  
+  <!-- 習得状態切替 -->
+  <rect x="660" y="540" width="110" height="40" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="672" y="563" font-family="Arial" font-size="12" fill="#333">習得済みにする</text>
+</svg>

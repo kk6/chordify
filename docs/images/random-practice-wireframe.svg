@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f5f5f5"/>
+  
+  <!-- ヘッダー -->
+  <rect x="0" y="0" width="800" height="60" fill="#4a69bd"/>
+  <text x="30" y="38" font-family="Arial" font-size="24" fill="white">🎸 Chordify</text>
+  
+  <!-- ナビゲーションメニュー -->
+  <rect x="0" y="60" width="800" height="40" fill="#e5e7eb"/>
+  <text x="30" y="85" font-family="Arial" font-size="16" fill="#777">コード一覧</text>
+  <text x="150" y="85" font-family="Arial" font-size="16" fill="#4a69bd" font-weight="bold">ランダム練習</text>
+  <text x="290" y="85" font-family="Arial" font-size="16" fill="#777">学習進捗</text>
+  <text x="400" y="85" font-family="Arial" font-size="16" fill="#777">タグ管理</text>
+  
+  <!-- 説明テキスト -->
+  <rect x="30" y="120" width="740" height="60" rx="5" fill="#e5f6fd" stroke="#90cdf4"/>
+  <text x="50" y="155" font-family="Arial" font-size="16" fill="#3182ce">
+    今日の練習コードが表示されています。習得したら「習得済み」ボタンを押しましょう。
+  </text>
+  
+  <!-- 日付表示 -->
+  <text x="50" y="210" font-family="Arial" font-size="18" font-weight="bold" fill="#333">本日のランダムコード (2025/03/25)</text>
+  
+  <!-- コードカード -->
+  <rect x="50" y="230" width="700" height="320" rx="10" fill="white" stroke="#ccc" stroke-width="1"/>
+  
+  <!-- コード名 -->
+  <text x="400" y="280" font-family="Arial" font-size="36" font-weight="bold" fill="#333" text-anchor="middle">D7 (D Dominant 7th)</text>
+  
+  <!-- タグ表示エリア -->
+  <rect x="320" y="300" width="70" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="335" y="317" font-family="Arial" font-size="14" fill="white">基本</text>
+  <rect x="400" y="300" width="50" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="415" y="317" font-family="Arial" font-size="14" fill="white">D</text>
+  <rect x="460" y="300" width="60" height="25" rx="12.5" fill="#4a69bd"/>
+  <text x="475" y="317" font-family="Arial" font-size="14" fill="white">7th</text>
+  
+  <!-- コード図 -->
+  <rect x="280" y="340" width="240" height="180" rx="5" fill="#f5f5f5" stroke="#ccc"/>
+  
+  <!-- フレット図 -->
+  <rect x="300" y="350" width="200" height="160" fill="#f0f0f0" stroke="#ccc"/>
+  
+  <!-- フレット横線 -->
+  <line x1="300" y1="370" x2="500" y2="370" stroke="#666" stroke-width="2"/>
+  <line x1="300" y1="400" x2="500" y2="400" stroke="#666" stroke-width="1"/>
+  <line x1="300" y1="430" x2="500" y2="430" stroke="#666" stroke-width="1"/>
+  <line x1="300" y1="460" x2="500" y2="460" stroke="#666" stroke-width="1"/>
+  <line x1="300" y1="490" x2="500" y2="490" stroke="#666" stroke-width="1"/>
+  
+  <!-- 弦縦線 -->
+  <line x1="313" y1="350" x2="313" y2="510" stroke="#333" stroke-width="1"/>
+  <line x1="346" y1="350" x2="346" y2="510" stroke="#333" stroke-width="1.2"/>
+  <line x1="380" y1="350" x2="380" y2="510" stroke="#333" stroke-width="1.4"/>
+  <line x1="413" y1="350" x2="413" y2="510" stroke="#333" stroke-width="1.6"/>
+  <line x1="447" y1="350" x2="447" y2="510" stroke="#333" stroke-width="1.8"/>
+  <line x1="480" y1="350" x2="480" y2="510" stroke="#333" stroke-width="2"/>
+  
+  <!-- 押弦位置 -->
+  <text x="480" y="345" font-family="Arial" font-size="14" fill="#333">X</text>
+  <text x="447" y="345" font-family="Arial" font-size="14" fill="#333">X</text>
+  <circle cx="413" cy="385" r="15" fill="#4a69bd"/>
+  <circle cx="380" cy="385" r="15" fill="#4a69bd"/>
+  <circle cx="346" cy="415" r="15" fill="#4a69bd"/>
+  <circle cx="313" cy="385" r="15" fill="#4a69bd"/>
+  
+  <!-- 音声再生ボタン -->
+  <circle cx="400" cy="550" r="30" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
+  <polygon points="390,535 390,565 420,550" fill="white"/>
+  
+  <!-- ナビゲーションボタン -->
+  <rect x="190" y="545" width="180" height="40" rx="20" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="230" y="570" font-family="Arial" font-size="16" fill="#333">前のコード</text>
+  <polygon points="220,550 210,562 220,574" fill="#333"/>
+  
+  <rect x="610" y="545" width="150" height="40" rx="20" fill="#4a69bd"/>
+  <text x="635" y="570" font-family="Arial" font-size="16" fill="white">習得済み</text>
+  <text x="590" y="570" font-family="Arial" font-size="16" fill="white">✓</text>
+  
+  <rect x="430" y="545" width="180" height="40" rx="20" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="470" y="570" font-family="Arial" font-size="16" fill="#333">次のコード</text>
+  <polygon points="580,550 590,562 580,574" fill="#333"/>
+</svg>
