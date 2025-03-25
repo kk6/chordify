@@ -124,6 +124,23 @@ jobs:
 
             const event = context.eventName;
 
+            if (event === "pull_request") {
+              const pr = context.payload.pull_request;
+              const body = pr.body || "";
+
+              // Closes #12 などをパースする
+              const matches = [...body.matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#(\d+)/gi)];
+              const issueNumbers = matches.map(match => parseInt(match[1], 10));
+
+              for (const issueNumber of issueNumbers) {
+                if (context.payload.action === 'closed' && pr.merged) {
+                  await updateStatus(issueNumber, STATUS.DONE);
+                } else if (context.payload.action === 'opened') {
+                  await updateStatus(issueNumber, STATUS.IN_REVIEW);
+                }
+              }
+            }
+
             if (event === "issues") {
               const issue = context.payload.issue;
 
