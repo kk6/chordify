@@ -52,8 +52,8 @@ jobs:
                       }
                     }
                   }
-                }
-              `, { projectId });
+                `, { projectId });
+
 
               return result.node.items.nodes.find(i => i.content?.number === issueNumber)?.id || null;
             }
