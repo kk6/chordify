@@ -31,7 +31,8 @@ jobs:
               let endCursor = null;
 
               while (hasNextPage) {
-                const result = await github.graphql(`
+                const result = await github.graphql(
+                  `
                   query($projectId: ID!, $after: String) {
                     node(id: $projectId) {
                       ... on ProjectV2 {
@@ -52,10 +53,20 @@ jobs:
                       }
                     }
                   }
-                `, { projectId });
+                  `,
+                  {
+                    projectId: projectId,
+                    after: endCursor,
+                  }
+                );
 
+                const pageItems = result.node.items.nodes;
+                items = items.concat(pageItems);
+                hasNextPage = result.node.items.pageInfo.hasNextPage;
+                endCursor = result.node.items.pageInfo.endCursor;
+              }
 
-              return result.node.items.nodes.find(i => i.content?.number === issueNumber)?.id || null;
+              return items.find((i) => i.content?.number === issueNumber)?.id || null;
             }
 
             async function updateStatus(issueNumber, statusId) {
@@ -136,17 +147,14 @@ jobs:
             if (event === "issues") {
               const issue = context.payload.issue;
 
-              // Issue作成時にプロジェクトへ追加
               if (context.payload.action === "opened") {
                 await addIssueToProject(issue.node_id);
               }
 
-              // AssigneeがついたらIn progressへ
               if (context.payload.action === "assigned") {
                 await updateStatus(issue.number, STATUS.IN_PROGRESS);
               }
 
-              // ラベルによる自動ステータス変更
               if (context.payload.action === "labeled") {
                 const label = context.payload.label.name.toLowerCase();
 
