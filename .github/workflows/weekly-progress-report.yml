@@ -1,0 +1,112 @@
+name: Weekly Progress Report
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # 毎週月曜 9:00 UTC（日本時間18:00）
+
+jobs:
+  weekly-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate and Post Weekly Progress
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const projectId = "PVT_kwHOAAkYos4A1Ltq";
+            const reportIssueNumber = 1; // ← 進捗ログ用のIssue番号に変更可能
+
+            const since = new Date();
+            since.setDate(since.getDate() - 7);
+            const sinceISO = since.toISOString();
+
+            const issuesClosed = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${owner}/${repo} is:issue is:closed closed:>=${sinceISO}`
+            });
+
+            const prsMerged = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${owner}/${repo} is:pr is:merged merged:>=${sinceISO}`
+            });
+
+            const issuesCreated = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${owner}/${repo} is:issue created:>=${sinceISO}`
+            });
+
+            const milestoneData = await github.rest.issues.listMilestones({
+              owner,
+              repo,
+              state: "open"
+            });
+
+            let milestoneLine = "_No active milestone_";
+            const active = milestoneData.data.find(m => m.title.toLowerCase().includes("v1"));
+            if (active) {
+              const percent = Math.round((active.closed_issues / (active.open_issues + active.closed_issues)) * 100);
+              milestoneLine = `🏁 Milestone "${active.title}": ${active.closed_issues}/${active.open_issues + active.closed_issues} closed (${percent}%)`;
+            }
+
+            const projectStatus = await github.graphql(`
+              query($projectId: ID!) {
+                node(id: $projectId) {
+                  ... on ProjectV2 {
+                    items(first: 100) {
+                      nodes {
+                        id
+                        fieldValues(first: 10) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `, { projectId });
+
+            const statusCounts = {
+              Backlog: 0,
+              Ready: 0,
+              "In progress": 0,
+              "In review": 0,
+              Done: 0
+            };
+
+            for (const item of projectStatus.node.items.nodes) {
+              const status = item.fieldValues.nodes.find(f => f.name)?.name;
+              if (status && statusCounts[status] !== undefined) {
+                statusCounts[status]++;
+              }
+            }
+
+            const report = `
+            📊 **Weekly Progress Report** (${new Date().toISOString().slice(0, 10)})
+
+            ✅ Closed Issues: ${issuesClosed.data.total_count}
+            🔀 Merged PRs: ${prsMerged.data.total_count}
+            📝 New Issues: ${issuesCreated.data.total_count}
+
+            ${milestoneLine}
+
+            🧩 **Project Board**
+            - Backlog: ${statusCounts.Backlog}
+            - Ready: ${statusCounts.Ready}
+            - In Progress: ${statusCounts["In progress"]}
+            - In Review: ${statusCounts["In review"]}
+            - Done: ${statusCounts.Done}
+
+            _Keep going strong 💪_
+            `;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: reportIssueNumber,
+              body: report
+            });
+
+            console.log("✅ Weekly report posted.");
