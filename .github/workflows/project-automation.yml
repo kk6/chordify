@@ -14,7 +14,7 @@ jobs:
       - name: Automate Project Status
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_PROJECT_AUTOMATION }}
           script: |
             const projectId = "PVT_kwHOAAkYos4A1Ltq";
             const statusFieldId = "PVTSSF_lAHOAAkYos4A1Ltqzgqsc9s";
