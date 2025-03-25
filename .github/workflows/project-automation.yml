@@ -1,0 +1,48 @@
+name: Project Automation
+
+on:
+  pull_request:
+    types: [opened, closed]
+  issues:
+    types: [assigned]
+
+jobs:
+  update-project-status:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event.pull_request != null || github.event.issue != null
+    steps:
+      - name: Move linked issue when PR is merged
+        if: github.event.pull_request.merged == true
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const projectId = YOUR_PROJECT_ID;
+            const columnId = YOUR_DONE_COLUMN_ID;
+
+            const pr = context.payload.pull_request;
+            const linkedIssues = await github.rest.issues.listEventsForTimeline({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              mediaType: {
+                previews: ['mockingbird']
+              }
+            });
+
+            for (const event of linkedIssues.data) {
+              if (event.event === 'cross-referenced' && event.source?.issue?.pull_request == null) {
+                const issue = event.source.issue;
+                // 移動処理（GraphQLまたはREST API）
+                console.log(`Would move issue #${issue.number} to DONE`);
+                // 実際の移動コードはAPI呼び出しが必要（後述）
+              }
+            }
+
+      - name: Handle PR Opened → Move to In review
+        if: github.event.action == 'opened' && github.event.pull_request != null
+        run: echo "Would move related issue(s) to 'In review'"
+
+      - name: Handle Issue Assignment → Move to In progress
+        if: github.event.action == 'assigned'
+        run: echo "Would move issue #${{ github.event.issue.number }} to 'In progress'"
