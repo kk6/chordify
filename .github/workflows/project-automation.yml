@@ -1,48 +1,145 @@
-name: Project Automation
+name: Project Board Automation
 
 on:
   pull_request:
     types: [opened, closed]
   issues:
-    types: [assigned]
+    types: [assigned, labeled, opened]
 
 jobs:
-  update-project-status:
+  project_automation:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true || github.event.pull_request != null || github.event.issue != null
     steps:
-      - name: Move linked issue when PR is merged
-        if: github.event.pull_request.merged == true
+      - name: Automate Project Status
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const projectId = YOUR_PROJECT_ID;
-            const columnId = YOUR_DONE_COLUMN_ID;
+            const projectId = "PVT_kwHOAAkYos4A1Ltq";
+            const statusFieldId = "PVTSSF_lAHOAAkYos4A1Ltqzgqsc9s";
+            const STATUS = {
+              BACKLOG: "f75ad846",
+              READY: "61e4505c",
+              IN_PROGRESS: "47fc9ee4",
+              IN_REVIEW: "df73e18b",
+              DONE: "98236657"
+            };
 
-            const pr = context.payload.pull_request;
-            const linkedIssues = await github.rest.issues.listEventsForTimeline({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pr.number,
-              mediaType: {
-                previews: ['mockingbird']
+            async function getProjectItemId(issueNumber) {
+              const result = await github.graphql(`
+                query($projectId: ID!) {
+                  node(id: $projectId) {
+                    ... on ProjectV2 {
+                      items(first: 100) {
+                        nodes {
+                          id
+                          content {
+                            ... on Issue {
+                              number
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `, { projectId });
+
+              return result.node.items.nodes.find(i => i.content?.number === issueNumber)?.id || null;
+            }
+
+            async function updateStatus(issueNumber, statusId) {
+              const itemId = await getProjectItemId(issueNumber);
+              if (!itemId) {
+                console.log(`❌ Issue #${issueNumber} not found in project.`);
+                return;
               }
-            });
 
-            for (const event of linkedIssues.data) {
-              if (event.event === 'cross-referenced' && event.source?.issue?.pull_request == null) {
-                const issue = event.source.issue;
-                // 移動処理（GraphQLまたはREST API）
-                console.log(`Would move issue #${issue.number} to DONE`);
-                // 実際の移動コードはAPI呼び出しが必要（後述）
+              await github.graphql(`
+                mutation($input: UpdateProjectV2ItemFieldValueInput!) {
+                  updateProjectV2ItemFieldValue(input: $input) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }
+              `, {
+                input: {
+                  projectId,
+                  itemId,
+                  fieldId: statusFieldId,
+                  value: {
+                    singleSelectOptionId: statusId
+                  }
+                }
+              });
+
+              console.log(`✅ Updated issue #${issueNumber} status.`);
+            }
+
+            async function addIssueToProject(issueNodeId) {
+              await github.graphql(`
+                mutation($input: AddProjectV2ItemByIdInput!) {
+                  addProjectV2ItemById(input: $input) {
+                    item {
+                      id
+                    }
+                  }
+                }
+              `, {
+                input: {
+                  projectId,
+                  contentId: issueNodeId
+                }
+              });
+
+              console.log(`✅ Issue added to project.`);
+            }
+
+            const event = context.eventName;
+
+            if (event === "pull_request") {
+              const pr = context.payload.pull_request;
+              const timeline = await github.rest.issues.listEventsForTimeline({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                mediaType: { previews: ['mockingbird'] }
+              });
+
+              for (const event of timeline.data) {
+                const issue = event.source?.issue;
+                if (event.event === 'cross-referenced' && issue && !issue.pull_request) {
+                  if (context.payload.action === 'closed' && pr.merged) {
+                    await updateStatus(issue.number, STATUS.DONE);
+                  } else if (context.payload.action === 'opened') {
+                    await updateStatus(issue.number, STATUS.IN_REVIEW);
+                  }
+                }
               }
             }
 
-      - name: Handle PR Opened → Move to In review
-        if: github.event.action == 'opened' && github.event.pull_request != null
-        run: echo "Would move related issue(s) to 'In review'"
+            if (event === "issues") {
+              const issue = context.payload.issue;
 
-      - name: Handle Issue Assignment → Move to In progress
-        if: github.event.action == 'assigned'
-        run: echo "Would move issue #${{ github.event.issue.number }} to 'In progress'"
+              // Issue作成時にプロジェクトへ追加
+              if (context.payload.action === "opened") {
+                await addIssueToProject(issue.node_id);
+              }
+
+              // AssigneeがついたらIn progressへ
+              if (context.payload.action === "assigned") {
+                await updateStatus(issue.number, STATUS.IN_PROGRESS);
+              }
+
+              // ラベルによる自動ステータス変更
+              if (context.payload.action === "labeled") {
+                const label = context.payload.label.name.toLowerCase();
+
+                if (label === "ready" || label === "high") {
+                  await updateStatus(issue.number, STATUS.READY);
+                } else if (label === "blocked") {
+                  await updateStatus(issue.number, STATUS.BACKLOG);
+                }
+              }
+            }
