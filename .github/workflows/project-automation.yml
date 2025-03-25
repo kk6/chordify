@@ -1,6 +1,7 @@
 name: Project Board Automation
 
 on:
+  workflow_dispatch:
   pull_request:
     types: [opened, closed]
   issues:
