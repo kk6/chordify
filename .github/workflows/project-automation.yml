@@ -19,11 +19,13 @@ jobs:
             const projectId = "PVT_kwHOAAkYos4A1Ltq";
             const statusFieldId = "PVTSSF_lAHOAAkYos4A1Ltqzgqsc9s";
             const STATUS = {
-              BACKLOG: "f75ad846",
-              READY: "61e4505c",
+              BACKLOG:     "f75ad846",
+              DISCUSSION:  "2a1136cd",
+              BLOCKED:     "1ae51637",
+              READY:       "61e4505c",
               IN_PROGRESS: "47fc9ee4",
-              IN_REVIEW: "df73e18b",
-              DONE: "98236657"
+              IN_REVIEW:   "df73e18b",
+              DONE:        "98236657"
             };
 
             async function getProjectItemId(issueNumber) {
@@ -146,6 +148,7 @@ jobs:
 
               if (context.payload.action === "opened") {
                 await addIssueToProject(issue.node_id);
+                await updateStatus(issue.number, STATUS.BACKLOG);
               }
 
               if (context.payload.action === "assigned") {
@@ -158,7 +161,10 @@ jobs:
                 if (label === "ready" || label === "high") {
                   await updateStatus(issue.number, STATUS.READY);
                 } else if (label === "blocked") {
-                  await updateStatus(issue.number, STATUS.BACKLOG);
+                  await updateStatus(issue.number, STATUS.BLOCKED);
+                } else if (label === "discussion") {
+                  await updateStatus(issue.number, STATUS.DISCUSSION);
                 }
               }
+
             }
