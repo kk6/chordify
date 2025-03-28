@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+issue_templates:
+  - name: "🐞 Bug Report"
+    description: "不具合の報告はこちら"
+    file: bug_report.yml
+  - name: "🚀 Feature Request"
+    description: "機能追加・改善の要望はこちら"
+    file: feature_request.yml
+  - name: "📝 Task"
+    description: "通常の作業タスク"
+    file: task.yml
+  - name: "💬 Discussion"
+    description: "検討・相談事項"
+    file: discussion.yml

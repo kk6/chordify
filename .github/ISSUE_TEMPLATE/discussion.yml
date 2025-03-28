@@ -1,0 +1,38 @@
+name: "💬 Discussion"
+description: "検討・相談事項"
+title: "[Discussion] "
+labels: ["discussion"]
+body:
+  - type: textarea
+    id: topic
+    attributes:
+      label: "📄 議題"
+      description: "検討したい内容・相談したいことを記載してください"
+      placeholder: "例）ディレクトリ構成をどうするか"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "🔍 背景・目的"
+      description: "この議題を検討する理由や背景を記載してください"
+    validations:
+      required: false
+
+  - type: textarea
+    id: options
+    attributes:
+      label: "📝 検討中の選択肢"
+      description: "思いついている案や選択肢があれば列挙してください"
+      placeholder: "- 案A：○○方式\n- 案B：××方式"
+    validations:
+      required: false
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: "🔗 参考情報"
+      description: "関連するリンクや参考資料があれば記載してください"
+    validations:
+      required: false

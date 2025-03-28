@@ -120,5 +120,7 @@ task test-cov
 - [UI設計](./docs/05_ui.md)
 - [開発環境構築手順](./docs/06_setup.md)
 - [GitHub Projects 運用ガイド](docs/07_project-management.md)
+- [Issue運用ガイドライン](docs/08_issue-guideline.md)
+- [Issueラベル一覧](docs/09_labels.md)
 
 ---

@@ -1,0 +1,39 @@
+name: "🐞 Bug Report"
+description: "不具合の報告はこちら"
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "📄 内容"
+      description: "どのような問題が発生したか、具体的に記載してください"
+      placeholder: "例）タスクの追加時に500エラーが発生する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "⚙️ 再現手順"
+      description: "不具合の再現手順を記載してください"
+      placeholder: "1. xxx を実行\n2. yyy を入力\n3. zzz を確認"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "✅ 期待する動作"
+      description: "本来どう動作すべきかを記載してください"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "📄 ログ・スクリーンショット"
+      description: "エラーログ・スクリーンショット等があれば添付してください"
+      placeholder: "ログ出力、エラー内容など"
+    validations:
+      required: false
