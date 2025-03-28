@@ -23,6 +23,12 @@
 - PostgreSQL
 - Gunicorn + Uvicorn Worker（ASGI）
 
+### 開発ツール
+- ruff (リンター・フォーマッター)
+- mypy (型チェック)
+- pytest / pytest-cov (テスト・カバレッジ)
+- Makefile / Taskfile (開発ワークフロー)
+
 ### インフラ
 - Docker / docker-compose
 - Nginx（リバースプロキシ）
@@ -32,20 +38,20 @@
 Chordifyは以下のような3層アーキテクチャで構築されています：
 
 1. **プレゼンテーション層**
-   - React SPA（Single Page Application）
-   - Tailwind CSSによるレスポンシブUI
-   - Zustandによる状態管理
-   - Axiosを用いたバックエンドとの通信
+    - React SPA（Single Page Application）
+    - Tailwind CSSによるレスポンシブUI
+    - Zustandによる状態管理
+    - Axiosを用いたバックエンドとの通信
 
 2. **ビジネスロジック層**
-   - Django Ninjaフレームワーク（FastAPIスタイルのPython RESTフレームワーク）
-   - JWT認証による安全なAPIアクセス
-   - ASGIサーバー（Gunicorn + Uvicorn）による高速レスポンス
+    - Django Ninjaフレームワーク（FastAPIスタイルのPython RESTフレームワーク）
+    - JWT認証による安全なAPIアクセス
+    - ASGIサーバー（Gunicorn + Uvicorn）による高速レスポンス
 
 3. **データ層**
-   - PostgreSQLデータベース
-   - JSONBデータ型を活用した柔軟なコード情報の格納
-   - Django ORMによるデータアクセス
+    - PostgreSQLデータベース
+    - JSONBデータ型を活用した柔軟なコード情報の格納
+    - Django ORMによるデータアクセス
 
 ## デプロイ方式
 
@@ -57,3 +63,14 @@ Dockerコンテナ技術を活用し、以下のコンテナで構成されて�
 4. **データベースコンテナ**：PostgreSQLを実行
 
 これらはすべてDocker Composeで管理され、開発環境と本番環境での一貫性を確保します。
+
+## 開発ワークフロー
+
+高品質なコードを維持するため、以下の開発ワークフローを採用しています：
+
+1. コードリンティングと自動フォーマット（ruff）
+2. 静的型チェック（mypy）
+3. 単体テストとカバレッジ計測（pytest, pytest-cov）
+4. MakefileとTaskfileによる開発コマンドの標準化
+
+詳細は [開発環境構築手順](./06_setup.md) を参照してください。

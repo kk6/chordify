@@ -2,53 +2,67 @@ name: Weekly Progress Report
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # 毎週月曜 9:00 UTC（日本時間18:00）
+    - cron: '0 9 * * 1' # 毎週月曜9:00 UTC
   workflow_dispatch:
 
 jobs:
-  weekly-report:
+  weekly-progress-report:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate and Post Weekly Progress
+      - name: Generate Weekly Progress Report
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PAT_PROJECT_AUTOMATION }}
           script: |
+            const reportIssueNumber = 11; // コメント投稿先のIssue番号
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const projectId = "PVT_kwHOAAkYos4A1Ltq";
-            const reportIssueNumber = 11;
 
-            const since = new Date();
-            since.setDate(since.getDate() - 7);
-            const sinceISO = since.toISOString();
+            const lastWeek = new Date();
+            lastWeek.setDate(lastWeek.getDate() - 7);
+            const lastWeekISO = lastWeek.toISOString();
 
-            const issuesClosed = await github.rest.search.issuesAndPullRequests({
-              q: `repo:${owner}/${repo} is:issue is:closed closed:>=${sinceISO}`
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              since: lastWeekISO,
+              state: "all",
+              per_page: 100,
             });
 
-            const prsMerged = await github.rest.search.issuesAndPullRequests({
-              q: `repo:${owner}/${repo} is:pr is:merged merged:>=${sinceISO}`
-            });
+            const closedIssues = issues.filter(i => i.state === "closed" && !i.pull_request);
+            const openedIssues = issues.filter(i => i.state === "open" && !i.pull_request);
+            const mergedPRs = issues.filter(i => i.pull_request && i.state === "closed");
 
-            const issuesCreated = await github.rest.search.issuesAndPullRequests({
-              q: `repo:${owner}/${repo} is:issue created:>=${sinceISO}`
-            });
-
-            const milestoneData = await github.rest.issues.listMilestones({
+            const milestones = await github.rest.issues.listMilestones({
               owner,
               repo,
               state: "open"
             });
 
-            let milestoneLine = "_No active milestone_";
-            const active = milestoneData.data.find(m => m.title.toLowerCase().includes("v1"));
-            if (active) {
-              const percent = Math.round((active.closed_issues / (active.open_issues + active.closed_issues)) * 100);
-              milestoneLine = `🏁 Milestone "${active.title}": ${active.closed_issues}/${active.open_issues + active.closed_issues} closed (${percent}%)`;
+            let milestoneProgress = "";
+            for (const m of milestones.data) {
+              milestoneProgress += `- ${m.title}: ${m.open_issues} open / ${m.closed_issues} closed\n`;
             }
 
-            const projectStatus = await github.graphql(`
+            // ラベル別集計
+            const labelCount = {};
+            issues.forEach(issue => {
+              issue.labels.forEach(label => {
+                if (label.name.startsWith('priority:') || label.name.startsWith('type:') || label.name.startsWith('area:')) {
+                  labelCount[label.name] = (labelCount[label.name] || 0) + 1;
+                }
+              });
+            });
+
+            let labelStats = "";
+            for (const [label, count] of Object.entries(labelCount)) {
+              labelStats += `- ${label}: ${count}件\n`;
+            }
+
+            // Projectカラムごとのタスク数取得
+            const projectId = "PVT_kwHOAAkYos4A1Ltq"; // 固定
+            const projectData = await github.graphql(`
               query($projectId: ID!) {
                 node(id: $projectId) {
                   ... on ProjectV2 {
@@ -69,45 +83,40 @@ jobs:
               }
             `, { projectId });
 
-            const statusCounts = {
-              Backlog: 0,
-              Ready: 0,
-              "In progress": 0,
-              "In review": 0,
-              Done: 0
-            };
+            const columnCount = {};
+            projectData.node.items.nodes.forEach(item => {
+              const status = item.fieldValues.nodes.find(f => f.name);
+              const name = status ? status.name : "Unknown";
+              columnCount[name] = (columnCount[name] || 0) + 1;
+            });
 
-            for (const item of projectStatus.node.items.nodes) {
-              const status = item.fieldValues.nodes.find(f => f.name)?.name;
-              if (status && statusCounts[status] !== undefined) {
-                statusCounts[status]++;
-              }
+            let columnStats = "";
+            for (const [col, count] of Object.entries(columnCount)) {
+              columnStats += `- ${col}: ${count}件\n`;
             }
 
             const report = `
-            📊 **Weekly Progress Report** (${new Date().toISOString().slice(0, 10)})
+              🗓️ **Weekly Progress Report**
 
-            ✅ Closed Issues: ${issuesClosed.data.total_count}
-            🔀 Merged PRs: ${prsMerged.data.total_count}
-            📝 New Issues: ${issuesCreated.data.total_count}
+              - 新規Issue数: ${openedIssues.length}
+              - クローズされたIssue数: ${closedIssues.length}
+              - マージされたPR数: ${mergedPRs.length}
 
-            ${milestoneLine}
+              🎯 アクティブなマイルストーン
+              ${milestoneProgress || "なし"}
 
-            🧩 **Project Board**
-            - Backlog: ${statusCounts.Backlog}
-            - Ready: ${statusCounts.Ready}
-            - In Progress: ${statusCounts["In progress"]}
-            - In Review: ${statusCounts["In review"]}
-            - Done: ${statusCounts.Done}
+              📌 Projectカラムごとのタスク数
+              ${columnStats}
 
-            _Keep going strong 💪_
+              🗂️ ラベル別統計
+              ${labelStats || "該当なし"}
             `;
 
             await github.rest.issues.createComment({
               owner,
               repo,
               issue_number: reportIssueNumber,
-              body: report
+              body: report,
             });
 
-            console.log("✅ Weekly report posted.");
+            console.log("✅ Weekly progress report posted.");
