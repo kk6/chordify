@@ -24,34 +24,7 @@
 
 タスクの種別・優先度・状態・担当領域を明確化するため、**prefix付きラベル** を運用しています。
 
-### Priority（優先度）
-
-- `priority:high` : 今すぐやる
-- `priority:medium` : 今月中にやる
-- `priority:low` : 気が向いたら
-
-### Status（状態）
-
-- `status:ready` : 着手準備OK
-- `status:blocked` : 他Issue待ち・依存タスク中
-
-### Type（タスク種別）
-
-- `type:feature` : 新機能追加
-- `type:bug` : バグ修正
-- `type:refactor` : リファクタリング
-- `type:chore` : 環境構築・依存更新・CI調整
-- `type:documentation` : ドキュメント関連
-- `type:discussion` : 要検討・議論が必要
-
-### Area（担当領域）
-
-- `area:api` : REST API設計・エンドポイント
-- `area:backend` : Django / API実装
-- `area:frontend` : React / UI実装
-- `area:ci` : GitHub Actions等CI設定
-- `area:infra` : インフラ・Nginx・Docker・デプロイ
-- `area:testing` : テスト関連
+詳細は [Issueラベル一覧](./09_labels.md) を参照してください。
 
 ---
 

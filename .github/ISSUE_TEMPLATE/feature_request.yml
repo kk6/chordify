@@ -1,0 +1,29 @@
+name: "🚀 Feature Request"
+description: "機能追加・改善の要望はこちら"
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: "📄 概要"
+      description: "追加・改善したい機能を簡潔に記載してください"
+      placeholder: "例）タスクの検索機能を追加したい"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "🔍 背景・目的"
+      description: "なぜその機能が必要か、目的や背景を記載してください"
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: "🛠️ 実装イメージ"
+      description: "具体的な実装方針・アイデアがあれば記載してください"
+    validations:
+      required: false

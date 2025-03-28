@@ -1,0 +1,21 @@
+name: "📝 Task"
+description: "通常の作業タスク"
+title: "[Task] "
+labels: ["task"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: "📄 タスク概要"
+      description: "実施すべき作業内容を簡潔に記載してください"
+      placeholder: "例）Dockerfileの最適化"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: "🔍 詳細"
+      description: "必要であれば補足情報を記載してください"
+    validations:
+      required: false
