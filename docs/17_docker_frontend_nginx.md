@@ -24,6 +24,14 @@
 
 ## フロントエンド (`frontend/`)
 
+`frontend/` ディレクトリには、Reactアプリケーションのソースコードと設定ファイルが含まれます。
+
+### 主要な設定ファイル
+
+-   **`package.json`**: プロジェクトの依存関係（React, Rspack関連など）と、`npm start`（開発サーバー起動）や `npm run build`（本番ビルド）などのスクリプトを定義します。
+-   **`rspack.config.js`**: Rspackビルドツール自体の設定ファイルです。エントリーポイント (`src/index.tsx`)、出力先 (`dist` ディレクトリ)、TypeScriptの処理方法 (`ts-loader`)、HTMLテンプレート (`public/index.html`) の利用などを設定します。
+-   **`tsconfig.json`**: TypeScriptコンパイラの設定ファイルです。コンパイルターゲット、JSXの扱い、モジュール解決方法などを定義します。
+
 ### `frontend/Dockerfile`
 
 Reactアプリケーションをビルドし、Nginxで配信するためのマルチステージDockerfileです。

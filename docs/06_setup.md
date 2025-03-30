@@ -51,6 +51,13 @@ chordify/
 └── docker-compose.yml
 ```
 
+**フロントエンド技術スタック:**
+
+-   フレームワーク: React
+-   言語: TypeScript
+-   ビルドツール: Rspack
+-   パッケージマネージャー: npm
+
 ## 開発用ツール
 
 ### コード品質管理

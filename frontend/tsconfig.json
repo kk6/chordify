@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2016", // Or a newer target like ES2020, ESNext
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true, // Rspack/ts-loader handles emission
+    "jsx": "react-jsx", // Use the new JSX transform
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Aliases (optional, configure in rspack.config.js resolve.alias as well) */
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"]
+    // }
+  },
+  "include": ["src"] // Only include files in the src directory
+}
