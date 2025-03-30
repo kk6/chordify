@@ -40,5 +40,48 @@ services:
     ports:
       - "5432:5432" # Expose PostgreSQL port if needed for direct access
 
+  frontend:
+    build:
+      context: ./frontend
+      # Optional: Specify target stage if your Dockerfile has multiple stages
+      # target: development # Or production
+    ports:
+      # The frontend container itself runs on port 80 (defined in frontend/Dockerfile)
+      # We don't expose it directly here as Nginx reverse proxy will handle access.
+      # - "3000:80" # Example if you needed direct access during development
+      - "80" # Expose port 80 within the Docker network for Nginx proxy
+    develop:
+      watch:
+        # Sync source code changes
+        - action: sync
+          path: ./frontend/src # Adjust path to your source code directory
+          target: /app/src
+          ignore:
+            - node_modules/
+        # Rebuild if dependencies change
+        - action: rebuild
+          path: ./frontend/package.json
+        - action: rebuild
+          path: ./frontend/package-lock.json # Or yarn.lock, pnpm-lock.yaml
+        # Sync other relevant config files if needed
+        # - action: sync+restart
+        #   path: ./frontend/vite.config.js
+        #   target: /app/vite.config.js
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+    depends_on:
+      - backend
+      - frontend
+    develop:
+      watch:
+        # Restart Nginx if its configuration changes
+        - action: sync+restart
+          path: ./nginx/nginx.conf
+          target: /etc/nginx/conf.d/default.conf
+
 volumes:
   postgres_data:

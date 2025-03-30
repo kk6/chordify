@@ -8,6 +8,8 @@ Dockerfileはマルチステージビルドを採用し、ビルドステージ�
 
 ![Dockerfileのマルチステージビルド構造](./images/docker-build-flow.svg)
 
+**Note:** このドキュメントはバックエンドのDocker設定に焦点を当てています。フロントエンドおよびNginxリバースプロキシのDocker設定については、[フロントエンド・Nginx Docker 構成ドキュメント](./17_docker_frontend_nginx.md) を参照してください。
+
 ## Dockerfile の内容
 
 ```dockerfile
