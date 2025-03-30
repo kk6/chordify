@@ -1,0 +1,53 @@
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  compile-lock:
+    desc: "🔐 uv.lock を生成"
+    dir: backend
+    cmds:
+      - uv pip compile pyproject.toml
+
+  install-deps:
+    desc: "📦 uv.lock をインストール"
+    dir: backend
+    cmds:
+      - uv sync
+
+  lint:
+    desc: "🧹 ruff でコード整形チェック"
+    dir: backend
+    cmds:
+      - ruff .
+
+  typecheck:
+    desc: "🔍 mypy で型チェック"
+    dir: backend
+    cmds:
+      - mypy .
+
+  test:
+    desc: "🧪 pytest でテスト実行"
+    dir: backend
+    cmds:
+      - pytest
+
+  dev-up:
+    desc: "🐳 Dockerコンテナをビルド & 起動"
+    cmds:
+      - docker compose build
+      - docker compose up
+
+  dev-down:
+    desc: "🧹 Dockerコンテナを停止 & 削除"
+    cmds:
+      - docker compose down
+
+  reload:
+    desc: "🔄 backend サービスのみ再起動"
+    cmds:
+      - docker compose restart backend

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <!-- 背景 -->
+  <rect width="800" height="550" fill="#f5f5f5"/>
+  
+  <!-- タイトル -->
+  <text x="400" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Dockerfileのマルチステージビルド構造</text>
+  
+  <!-- ビルドステージ (左側) -->
+  <rect x="50" y="70" width="300" height="380" rx="10" ry="10" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+  <text x="200" y="100" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">ビルドステージ</text>
+  <text x="200" y="125" font-family="Arial" font-size="15" text-anchor="middle">FROM python:3.12-slim AS builder</text>
+  
+  <!-- ビルドステージ内のコンポーネント -->
+  <rect x="80" y="145" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="170" font-family="Arial" font-size="14" text-anchor="middle">uvツールのコピー</text>
+  
+  <rect x="80" y="195" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="220" font-family="Arial" font-size="14" text-anchor="middle">環境変数の設定</text>
+  
+  <rect x="80" y="245" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="270" font-family="Arial" font-size="14" text-anchor="middle">仮想環境(.venv)の作成</text>
+
+  <rect x="80" y="295" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="320" font-family="Arial" font-size="14" text-anchor="middle">依存関係のインストール(uv sync)</text>
+  
+  <rect x="80" y="345" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="370" font-family="Arial" font-size="14" text-anchor="middle">アプリケーションコードのコピー</text>
+  
+  <rect x="80" y="395" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#6c8ebf" stroke-width="1"/>
+  <text x="200" y="420" font-family="Arial" font-size="14" text-anchor="middle">プロジェクト自体のインストール</text>
+  
+  <!-- 最終ステージ (右側) -->
+  <rect x="450" y="70" width="300" height="380" rx="10" ry="10" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+  <text x="600" y="100" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">最終ステージ</text>
+  <text x="600" y="125" font-family="Arial" font-size="15" text-anchor="middle">FROM python:3.12-slim</text>
+  
+  <!-- 最終ステージ内のコンポーネント -->
+  <rect x="480" y="145" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="170" font-family="Arial" font-size="14" text-anchor="middle">非rootユーザーの作成</text>
+  
+  <rect x="480" y="195" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="220" font-family="Arial" font-size="14" text-anchor="middle">ビルドステージからアプリをコピー</text>
+  
+  <rect x="480" y="245" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="270" font-family="Arial" font-size="14" text-anchor="middle">環境変数の設定</text>
+  
+  <rect x="480" y="295" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="320" font-family="Arial" font-size="14" text-anchor="middle">ポート8000の公開</text>
+  
+  <rect x="480" y="345" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="370" font-family="Arial" font-size="14" text-anchor="middle">作業ディレクトリの設定</text>
+  
+  <rect x="480" y="395" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="420" font-family="Arial" font-size="14" text-anchor="middle">ヘルスチェックの追加</text>
+  
+  <rect x="480" y="445" width="240" height="40" rx="5" ry="5" fill="#ffffff" stroke="#82b366" stroke-width="1"/>
+  <text x="600" y="470" font-family="Arial" font-size="14" text-anchor="middle">非rootユーザーに切り替え</text>
+  
+  <!-- 矢印 -->
+  <path d="M 350 260 L 450 260" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="400" y="250" font-family="Arial" font-size="14" text-anchor="middle">コピー</text>
+  
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+  </defs>
+  
+  <!-- 特徴 -->
+  <rect x="50" y="500" width="700" height="30" rx="5" ry="5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+  <text x="400" y="520" font-family="Arial" font-size="14" text-anchor="middle">最適化: キャッシュレイヤー, 依存関係の一元管理, 非rootユーザー, ヘルスチェック</text>
+</svg>
